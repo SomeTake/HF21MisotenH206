@@ -28,6 +28,9 @@ public:
 	MorphingMeshContainer();
 	virtual ~MorphingMeshContainer();
 
+	//リソース解放
+	virtual void ReleaseResource() override;
+
 	//現在保持しているメッシュをモーフテーブルに登録する
 	void RegisterVertex(unsigned index);
 
@@ -55,6 +58,7 @@ private:
 
 	//インデックスバッファ
 	LPDIRECT3DINDEXBUFFER9 indexBuff;
+
 
 	//頂点情報
 	DWORD fvf;

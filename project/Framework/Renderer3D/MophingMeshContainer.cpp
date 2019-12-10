@@ -49,6 +49,40 @@ MorphingMeshContainer::~MorphingMeshContainer()
 }
 
 /**************************************
+リソース解放処理
+***************************************/
+void MorphingMeshContainer::ReleaseResource()
+{
+	for (auto&& mesh : meshTable)
+	{
+		SAFE_RELEASE(mesh);
+	}
+
+	SAFE_RELEASE(indexBuff);
+
+	SAFE_RELEASE(declare);
+
+	for (auto&& container : textureContainer)
+	{
+		for (auto&& texture : container)
+		{
+			SAFE_RELEASE(texture);
+		}
+	}
+
+	for (auto&& container : materialContainer)
+	{
+		container.clear();
+	}
+
+	attributeTable.clear();
+
+	currentIndex = nextIndex = -1;
+
+	MeshContainer::ReleaseResource();
+}
+
+/**************************************
 メッシュ登録処理
 ***************************************/
 void MorphingMeshContainer::RegisterVertex(unsigned index)
@@ -69,7 +103,11 @@ void MorphingMeshContainer::RegisterVertex(unsigned index)
 	fvf = mesh->GetFVF();
 
 	if (indexBuff == NULL)
+	{
 		mesh->GetIndexBuffer(&indexBuff);
+		mesh->AddRef();
+
+	}
 
 	//マテリアル登録
 	materialContainer[index].reserve(materialNum);
