@@ -51,7 +51,7 @@ MorphingMeshContainer::~MorphingMeshContainer()
 /**************************************
 ƒŠƒ\[ƒX‰ğ•úˆ—
 ***************************************/
-void MorphingMeshContainer::ReleaseResource()
+void MorphingMeshContainer::Reset()
 {
 	for (auto&& mesh : meshTable)
 	{

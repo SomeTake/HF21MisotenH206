@@ -12,6 +12,7 @@
 //**************************************
 // マクロ定義
 //**************************************
+class MorphingMeshContainer;
 
 //**************************************
 // クラス定義
@@ -24,6 +25,15 @@ public:
 	~CityActor();
 
 	void Init(const D3DXVECTOR3& pos, Field::FieldLevel currentLevel) override;
+	void Uninit() override;
+	void Update() override;
+	void Draw() override;
+
+private:
+	MorphingMeshContainer * morphingMesh;
+	bool useMorphing;
+
+	float t;
 };
 
 #endif

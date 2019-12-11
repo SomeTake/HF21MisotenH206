@@ -29,7 +29,7 @@ public:
 	virtual ~MorphingMeshContainer();
 
 	//リソース解放
-	virtual void ReleaseResource() override;
+	virtual void Reset();
 
 	//現在保持しているメッシュをモーフテーブルに登録する
 	void RegisterVertex(unsigned index);
